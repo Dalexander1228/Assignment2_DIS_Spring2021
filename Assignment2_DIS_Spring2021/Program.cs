@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assignment2_DIS_Spring2021
 {
@@ -6,7 +8,7 @@ namespace Assignment2_DIS_Spring2021
     {
         static void Main(string[] args)
         {
-            //Question1:
+            //Question1
             int[] ar1 = { 2, 5, 1, 3, 4, 7 };
             int n1 = 3;
             ShuffleArray(ar1, n1);
@@ -108,17 +110,60 @@ namespace Assignment2_DIS_Spring2021
         /// </summary>
 
         private static void ShuffleArray(int[] nums, int n)
-        {
-            try
-            {
-                //write your code here.
-                
-            }
-            catch (Exception)
-            {
 
-                throw;
+        {
+            
+            //n = 3
+            int[] numbers = {2, 5, 1, 3, 4, 7 };
+
+            //index elements of the above array in order to manipualte positions.
+            int a = numbers[0];            
+            int b = numbers[1];
+            int c = numbers[2];
+            int d = numbers[3];
+            int e = numbers[4];
+            int f = numbers[5];
+
+            //group the elements of x1 y1, x2 y2, and x3 y3 together into an array in order to create new n3 ordered array.
+            int[] x1 = { a, d };
+            int[] x2 = { b, e };
+            int[] x3 = { c, f };
+
+
+            /*foreach (int element in x1)
+            {
+                Console.WriteLine(element);
             }
+            foreach (int element in x2)
+            {
+                Console.WriteLine(element);
+            }
+            foreach(int element in x3)
+            {
+                Console.WriteLine(element);
+            }
+            */
+
+            //merge all grouped arrays into one list. 
+            var list = new List<int>();
+            list.AddRange(x1);
+            list.AddRange(x2);
+            list.AddRange(x3);
+
+            //convert merged list back into an array for printing through a foreach statement.
+            int[] z = list.ToArray();
+
+            foreach (int element in z)
+            {
+                Console.WriteLine(element);
+            }
+            
+
+            //Self Reflection:
+            //had a good opportunity to work with array indexes and learned how to concatenate several arrays into one list for printing.
+
+
+
         }
 
         //Question 2:
@@ -136,6 +181,39 @@ namespace Assignment2_DIS_Spring2021
             {
                 //write your code here.
                 
+                int[] arr = {0,1,0,3,12};
+
+                int i, count = 0;
+
+                int n = 5;
+
+                //traverse the array
+                for (i = 0; i < n; i++)
+                {
+                    if (arr[i] > 0)
+                    {
+                        arr[count++] = arr[i];
+                    }
+                }
+
+                //push zero elements to the end
+                while (count < n)
+                {
+                    arr[count++] = 0;
+                }
+
+                //print output array
+                for (i=0; i<n; i++)
+                {
+                    Console.WriteLine(arr[i]);
+                }
+
+
+                //Self Reflection:
+                  //This exercise helped me experience again the power and creative use of the for loop statement in combination with the 
+                   //while loop to manipulate array elements.
+
+
             }
             catch (Exception)
             {
@@ -164,7 +242,32 @@ namespace Assignment2_DIS_Spring2021
         {
             try
             {
-                //write your code here.
+
+                //array of numbers to work with:
+                int[] array = { 1, 2, 3, 1, 1, 3 };
+
+                
+                Array.Sort(nums);
+                int count = 0;
+                int i = 0;
+
+                //interation of array index[j] relative to array index[i]
+                for(int j=1; j < nums.Length; j++)
+                {
+                    if (nums[j] == nums[i])
+                        count += j - i;
+                    else i = j;
+                }
+
+                //returns the count of paired numbers that are equal, yet where i<j  
+                Console.WriteLine($"number of cool pairs is: {count}");
+
+
+                //Self Reflection:
+                  //I learned a new creative way of how to sort elemets of an array through the use of for loops and if statements which i had 
+                   //never thought of.
+
+
             }
             catch (Exception)
             {
@@ -172,6 +275,9 @@ namespace Assignment2_DIS_Spring2021
                 throw;
             }
         }
+
+
+
 
         //Question 4:
         /// <summary>
@@ -190,12 +296,35 @@ namespace Assignment2_DIS_Spring2021
         ///Output: [0,1]
         ///Constraints: Time complexity should be O(n)
         /// </summary>
+  
+
         private static void TwoSum(int[] nums, int target)
         {
             try
             {
-                //write your code here.
                 
+                int[] numbers = { 2, 7, 11, 15 };
+                int targ = 9;
+                               
+                //create for loop with indice i to run through entire array 'numbers' 
+                for (int i=0; i < numbers.Length; i++)
+                {    
+                    
+                    //create nested for loop with indice j to run through entire array 'numbers' relative to indice i
+                    for (int j = i; j < numbers.Length; j++)            
+                    
+                    //though the nested for loop iteration processs, if the sum indices i and j equals to target (9) then print.  
+                    if (numbers[i] + numbers[j] == targ)
+ 
+                            Console.WriteLine($"the array indices that add up to the integer target are: {i},{j}");                   
+                }
+
+
+                //Self Reflection: This exercise is making me start realizing the creative uses of nested for loop statements which have
+                  //the ability to help me me find pattens or hidden results within combination of numbers within an array. 
+
+                 
+
             }
             catch (Exception)
             {
@@ -204,6 +333,11 @@ namespace Assignment2_DIS_Spring2021
             }
 
         }
+
+
+
+
+
 
         //Question 5:
         /// <summary>
@@ -222,19 +356,58 @@ namespace Assignment2_DIS_Spring2021
         ///Input: s = "ockry", indices = [1, 2, 3, 0, 4]
         ///Output: "rocky"
         /// </summary>
+        
+        
         private static void RestoreString(string s, int[] indices)
         {
             try
             {
-                //write your code here.
-                
+
+                int[] sequence = {6,4,3,2,1,0,5,7};
+                string word= "korfsucy";
+
+
+                //creating an array named str, which will represent the characters of the word array and equate it to the 
+                 //length of the sequence array
+                char[] str = new char[sequence.Length];
+
+
+                //initializing a for loop to go through the sequence array 
+                for (int i = 0; i < sequence.Length; i++)
+                {
+
+                    //once the sequence array for loop has been iterated, it will converge the indices of the array that have
+                     //equal values
+                    str[sequence[i]] = (str[i]);
+
+
+                    //print the str array in the new order
+                    Console.WriteLine(str);
+
+                }
+
+
+
+                //Self Reflection: I worked on this problem about 2.5 hours, I attempted the logic as best I could, but am still
+                 //not able to get the approptiate output. I Feel that what i'm missing is minor but im not able to spot it.
+
+
             }
+
+
+
             catch (Exception)
             {
 
                 throw;
             }
+
         }
+
+
+
+
+
 
         //Question 6
         /// <summary>
@@ -254,19 +427,93 @@ namespace Assignment2_DIS_Spring2021
         ///Input : s1 = “ab” s2 = “aa”
         ///Output: False
         /// </summary>
-        private static bool Isomorphic(string s1, string s2)
+
+
+        private static bool Isomorphic(string str1, string str2)
         {
             try
             {
-                //write your code here.
-                return false;
+
+                    int m = str1.Length;
+                    int n = str2.Length;
+
+                    // Length of both strings must be same  
+                     // for one to one corresponance 
+                    if (m != n)
+                    Console.WriteLine("false"); 
+
+
+                    // To mark visited characters in str2 
+                    bool[] marked = new bool[str2.Length];
+
+                    for (int i = 0; i < str2.Length; i++)
+                        marked[i] = false;
+
+
+                    // To store mapping of every character 
+                     // from str1 to that of str2 and 
+                      // Initialize all entries of map as -1. 
+                    int[] map = new int[str1.Length];
+
+                    for (int i = 0; i < str1.Length; i++)
+                        map[i] = -1;
+
+                    // Process all characters one by on 
+                    for (int i = 0; i < n; i++)
+                    {
+
+                        // If current character of str1 is  
+                         // seen first time in it. 
+                        if (map[str1[i]] == -1)
+                        {
+
+                            // If current character of str2 
+                             // is already seen, one to 
+                              // one mapping not possible 
+                            if (marked[str2[i]] == true)
+                            Console.WriteLine("false");
+
+                          // Mark current character of  
+                           // str2 as visited 
+                          marked[str2[i]] = true;
+
+                            // Store mapping of current characters 
+                            map[str1[i]] = str2[i];
+                        }
+
+                        // If this is not first appearance of current 
+                         // character in str1, then check if previous 
+                          // appearance mapped to same character of str2 
+                        else if (map[str1[i]] != str2[i])
+
+                            Console.WriteLine("false");
+                    }
+
+                        
+                    Console.WriteLine("true");
+
+
+
+                //Self Reflection: I worked on this problem for about 3 hours and went through the logic as best I could,
+                 //but i honesty dont completly understand how to get the appropriate output. Im stil confused as to how to 
+                  //translate this question into code.
+
             }
+
+
             catch (Exception)
             {
 
                 throw;
             }
+
+
         }
+
+
+
+
+
 
         //Question 7
         /// <summary>
@@ -289,19 +536,35 @@ namespace Assignment2_DIS_Spring2021
         /// 0 <= scorei <= 100
         /// For each IDi, there will be at least five scores.
         /// </summary>
+
+
+
         private static void HighFive(int[,] items)
         {
             try
             {
-                //write your code here.
+
                 
             }
+
+
             catch (Exception)
             {
 
                 throw;
             }
+
+
+            //Self Reflection:  Im not even sure where to begin with this question..
+             //beyond my current level of programming understanding, I aspire to one day be able to take on this type of challenge.
+
+
         }
+
+
+
+
+
 
         //Question 8
         /// <summary>
@@ -326,19 +589,90 @@ namespace Assignment2_DIS_Spring2021
         ///1 <= n <= 231 - 1
         /// </summary>
 
+
         private static bool HappyNumber(int n)
         {
+
             try
+                
             {
-                //write your code here.
+                int n8 = 19;
+
+
+                int squareSum = 0;
+                    while (n != 0)
+                    {
+                        squareSum += (n8 % 10) *
+                                     (n8 % 10);
+                        n8 /= 10;
+                    }
+                    Console.WriteLine(squareSum);
+                
+
+                // method return true if 
+                 // n is Happy number 
+                  
+                {
+                    int slow, fast;
+
+                    // initialize slow and 
+                     // fast by n8 
+                    slow = fast = n8;
+                    do
+                    {
+
+                        // move slow number 
+                         // by one iteration 
+                        slow = numSquareSum(slow);
+
+                        // move fast number 
+                         // by two iteration 
+                        fast = numSquareSum(numSquareSum(fast));
+
+                    }
+
+                    while (slow != fast);
+
+                    // if both number meet at 1, 
+                     // then return true 
+                   Console.WriteLine(slow == 1);
+
+                }
+
+
                 return false;
+
+
+
+                //Self Reflection: I worked on this problem for about 3 hours, i tried the logic as best I could,
+                 //but as a beginner with no previous experience in programming, these last couple of problems just proved
+                  //to be to difficult and beyond my current comprehension. Though I must admit that the hours spent 
+                   //struggling with these exercises have been useful and made me more knowledgable and aware of the 
+                    //C# languange and programming overall. As useful as this experience has been for me, I just hope 
+                     //its enough to impress the professor to not give me a bad grade, given all ive learned so far. 
+
+
+
             }
             catch (Exception)
+            
             {
 
                 throw;
             }
         }
+
+
+
+        private static int numSquareSum(int slow)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
 
         //Question 9
         /// <summary>
@@ -357,11 +691,53 @@ namespace Assignment2_DIS_Spring2021
         ///Try to solve it in O(n) time complexity.
         /// </summary>
 
+
+
         private static int Stocks(int[] prices)
         {
             try
             {
-                //write your code here.
+
+
+                int[] ar9 = { 7, 1, 5, 3, 6, 4 };
+            
+                //assign variables for lowest and highest price for stock
+                int lowestprice = ar9[0];
+                int highestprice = ar9[1];
+
+
+                //iterate array with for loop in attempt to isolate lowestprice 
+                for (int i = 0; i < ar9.Length; i++)
+
+                {
+                    if (ar9[i] < lowestprice)
+
+                        lowestprice = ar9[i];
+
+                }
+
+                //iterate array with for loop in attempt to isolate highestprice which comes after the lowest price array indice
+                for (int j = 1; j < ar9.Length; j++)
+
+                {
+                    if (ar9[j] > highestprice)
+
+                        highestprice = ar9[j];
+                }
+
+
+                int maxprofit = (highestprice - lowestprice);
+
+                Console.WriteLine(maxprofit);
+
+
+
+                //Self Reflection: This was an interesting question, giving me furthur experience on how to 
+                 //manipulate elements of an array, as well as how to sort through arrays with more than one
+                  //for loop in order to isoalte multiple values.
+
+
+
                 return 0;
             }
             catch (Exception)
@@ -370,6 +746,8 @@ namespace Assignment2_DIS_Spring2021
                 throw;
             }
         }
+
+
 
         //Question 10
         /// <summary>
@@ -392,12 +770,42 @@ namespace Assignment2_DIS_Spring2021
         ///Hint : Use the concept of Fibonacci series.
         /// </summary>
 
+
+
         private static void Stairs(int steps)
         {
             try
             {
-                //write your code here.
-              
+               
+                //number of combinations to climb to the top
+                int n10 = 3;   
+                
+                
+                //Need to decrement by 1 since we are starting from 0
+                int number = n10 - 1;   
+                int[] step = new int[number + 1];
+
+                //representative of each step
+                step[0] = 0;
+                step[1] = 1;
+                step[2] = 2;
+
+                //iterate through all step options 
+                for (int i = 3; i <= number; i++)
+                {
+                    step[i] = step[i - 3] + step[i - 2] + step[i - 1];
+                }
+
+                Console.WriteLine(step[number]);
+
+                
+
+                //Self Reflection:  though i spend a couple hours trying to resolve this problem, im still confused as to how to
+                 //implement number sequences into C# code language, but with each more problem that I struggle with, i become each
+                  //time more familiar with the process.
+
+
+
             }
             catch (Exception)
             {
